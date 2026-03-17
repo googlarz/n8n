@@ -3093,6 +3093,22 @@ export namespace WorkflowSettings {
 	export type CallerPolicy = 'any' | 'none' | 'workflowsFromAList' | 'workflowsFromSameOwner';
 	export type SaveDataExecution = 'DEFAULT' | 'all' | 'none';
 	export type RedactionPolicy = 'none' | 'all' | 'non-manual' | 'manual-only';
+	export type ViewerInputType = 'text' | 'textarea' | 'number' | 'boolean' | 'file';
+
+	export interface ViewerInputField {
+		key: string;
+		label: string;
+		type: ViewerInputType;
+		required?: boolean;
+		placeholder?: string;
+		helpText?: string;
+		accept?: string;
+	}
+
+	export interface ViewerMode {
+		manual?: string;
+		inputs?: ViewerInputField[];
+	}
 }
 
 export type WorkflowSettingsBinaryMode = typeof BINARY_MODE_SEPARATE | typeof BINARY_MODE_COMBINED;
@@ -3114,6 +3130,7 @@ export interface IWorkflowSettings {
 	availableInMCP?: boolean;
 	credentialResolverId?: string;
 	redactionPolicy?: WorkflowSettings.RedactionPolicy;
+	viewerMode?: WorkflowSettings.ViewerMode;
 }
 
 export interface WorkflowFEMeta {
